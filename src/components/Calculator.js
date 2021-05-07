@@ -9,7 +9,7 @@ const Calculator = () => {
         if (elem === "=") {
             if ((result.slice(-1) === "/" || result.slice(-1) === "*" || result.slice(-1) === "-" || result.slice(-1) === "+")) {
                 setCalculation(result.substring(0, result.length - 1));
-                setResult(eval(result.substring(0, result.length - 1)));
+                setResult(eval(result.substring(0, result.length - 1)).toString());
             } else {
                 setCalculation(result);
                 setResult(eval(result).toString());
@@ -72,7 +72,7 @@ const Calculator = () => {
                     <div className="key change material-icons material-icons-outlined" onClick={() => {handleVisuals('change')}}>change_circle</div>
                     <div className="key 0" onClick={() => {handleKeys('0')}}>0</div>
                     <div className="key dot" onClick={() => {handleKeys('.')}}>.</div>
-                    <div className="operator equal" onClick={() => {handleKeys('=')}}>=</div>
+                    <div className="equal" onClick={() => {handleKeys('=')}}>=</div>
                 </div>
             </div>
         </div>
