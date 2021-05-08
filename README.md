@@ -1,7 +1,7 @@
 # About App
 
 A simple calculator made with ReactJS. \
-Demo at [react_calculatot](https://calculator-react-jet.vercel.app/)
+Demo at [react_calculator](https://calculator-react-jet.vercel.app/)
 
 ## Tools Used:
 - HTML
