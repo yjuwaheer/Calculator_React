@@ -1,8 +1,43 @@
 import { useState } from "react";
 
 const Calculator = () => {
+    const [background, setBackground] = useState("sunny");
     const [calculation, setCalculation] = useState("");
     const [result, setResult] = useState("");
+    const [selectedTheme, setSelectedTheme] = useState(0);
+    const [theme, setTheme] = useState([{
+        "--cal-background": "#FFBB41",
+        "--display": "#FCEBD8",
+        "--divider": "#FCEBD8",
+        "--keys": "#FCEBD8",
+        "--keys-hover": "#fce1c3",
+        "--operators": "#955015",
+        "--operators-hover": "#be6416",
+        "--equal": "#955015",
+        "--equal-hover": "#ad5d18"
+    },
+    {
+        "--cal-background": "#FFFFFF",
+        "--display": "#2D414A",
+        "--divider": "#2A3E47",
+        "--keys": "#5D6C73",
+        "--keys-hover": "#212627",
+        "--operators": "#FF6945",
+        "--operators-hover": "#f83200",
+        "--equal": "#FF6945",
+        "--equal-hover": "#ff5b32"
+    },
+    {
+        "--cal-background": "#2D4049",
+        "--display": "#E0D9CA",
+        "--divider": "#E0D9CA",
+        "--keys": "#E0D9CA",
+        "--keys-hover": "#fadfa5",
+        "--operators": "#AA5745",
+        "--operators-hover": "#d85d41",
+        "--equal": "#AA5745",
+        "--equal-hover": "#c96a17"
+    }]);
 
     // Handle numbers and operators
     const handleKeys = (elem) => {
@@ -33,7 +68,32 @@ const Calculator = () => {
         if (elem === "ac" || elem === "c") {
             setCalculation("");
             setResult("");
-        }
+        };
+
+        if (elem === "sunny") {
+            if (background === "sunny") {
+                setBackground("dark");
+                document.querySelector(".sunny").innerHTML = "wb_sunny";
+                document.body.style.background = "#272727";
+            } else {
+                setBackground("sunny");
+                document.querySelector(".sunny").innerHTML = "dark_mode";
+                document.body.style.background = "#FCF5ED";
+            };
+        };
+
+        if (elem === "change") {
+            let root = document.querySelector(":root");
+            for (const key in theme[selectedTheme]) {
+                root.style.setProperty(key, theme[selectedTheme][key]);
+            };
+
+            if (selectedTheme < 2) {
+                setSelectedTheme(prev => prev + 1);
+            } else {
+                setSelectedTheme(0);
+            }
+        };
     }
 
     return ( 
@@ -45,7 +105,7 @@ const Calculator = () => {
             <div className="divider"></div>
             <div className="keys">
                 <div className="rows">
-                    <div className="key sunny material-icons material-icons-outlined" onClick={() => {handleVisuals('sunny')}}>wb_sunny</div>
+                    <div className="key sunny material-icons material-icons-outlined" onClick={() => {handleVisuals('sunny')}}>dark_mode</div>
                     <div className="key ac" onClick={() => {handleVisuals('ac')}}>AC</div>
                     <div className="key c" onClick={() => {handleVisuals('c')}}>C</div>
                     <div className="operator division" onClick={() => {handleKeys('/')}}>/</div>
